@@ -46,7 +46,7 @@ jobs:
 
       - name: Create NuGet package
         run: |
-          $version = Get-Content src/Magick.Native/Magick.Native.version
+          $version = Get-Content ../src/Magick.Native/Magick.Native.version
           $commit = git rev-parse HEAD
           .\publish.android.cmd ${{ matrix.quantum }} "${{ matrix.platform }}" $version $commit
         shell: pwsh
