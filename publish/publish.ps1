@@ -6,6 +6,7 @@ param (
     [string]$platformName,
     [string]$version,
     [string]$commit,
+    [switch]$android = $false,
     [parameter(mandatory=$true)][string]$destination
 )
 
@@ -64,6 +65,10 @@ function addNativeLibraries($xml, $quantumName, $platform) {
     }
 }
 
+function addAndroidNativeLibrary($xml, $quantumName, $platform) {
+    addNativeLibrary $xml $platform "android" "$quantumName-$platform.dll.so"
+}
+
 function createMagickNetNuGetPackage($quantumName, $platform, $version, $commit) {
     $xml = loadAndInitNuSpec "Magick.NET" $version $commit
 
@@ -80,11 +85,32 @@ function createMagickNetNuGetPackage($quantumName, $platform, $version, $commit)
     createNuGetPackage $xml $name
 }
 
+function createMagickNetAndroidNuGetPackage($quantumName, $platform, $version, $commit) {
+    $xml = loadAndInitNuSpec "Magick.NET" $version $commit
+
+    $name = "Magick.NET-$quantumName-$platform"
+    $xml.package.metadata.id = $name
+    $xml.package.metadata.title = $name
+
+    addMagickNetLibraries $xml $quantumName $platform
+    addAndroidNativeLibrary $xml $quantumName $platform
+    addNotice $xml
+    addFile $xml "Magick.NET.targets" "build\netstandard20\$name.targets"
+    addFile $xml "Magick.NET.targets" "buildTransitive\netstandard20\$name.targets"
+
+    createNuGetPackage $xml $name
+}
+
 $platform = $platformName
 
 if ($platform -eq "Any CPU") {
     $platform = "AnyCPU"
 }
 
-createMagickNetNuGetPackage $quantumName $platform $version $commit
+if ($android -eq $true) {
+    createMagickNetAndroidNuGetPackage $quantumName $platform $version $commit
+} else {
+    createMagickNetNuGetPackage $quantumName $platform $version $commit
+}
+
 copyNuGetPackages $destination

@@ -1,0 +1,59 @@
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+name: Build Android
+jobs:
+  android:
+    name: Android (${{matrix.quantum}}, ${{matrix.platform}})
+    runs-on: windows-2025-vs2026
+
+    strategy:
+      fail-fast: false
+      matrix:
+        quantum: [Q8, Q16, Q16-HDRI]
+        platform: [arm64, x64]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install dependencies
+        run: ./install.dependencies.sh
+        shell: bash
+        working-directory: build/windows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Magick.Native
+        run: build/shared/install.Magick.Native.android.sh "${{ matrix.platform }}" ${{ matrix.quantum }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Magick.NET (Release)
+        run: ./build.Magick.NET.cmd ${{ matrix.quantum }} "${{ matrix.platform }}" Release
+        working-directory: build/windows
+
+      - name: Install NuGet
+        run: ./install.nuget.cmd
+        working-directory: build/windows
+
+      - name: Create NuGet package
+        run: |
+          $version = Get-Content src/Magick.Native/Magick.Native.version
+          $commit = git rev-parse HEAD
+          .\publish.android.cmd ${{ matrix.quantum }} "${{ matrix.platform }}" $version $commit
+        shell: pwsh
+        working-directory: publish
+
+      - name: Upload library
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
+        with:
+          name: Magick.NET-${{ matrix.quantum }}-${{ matrix.platform }}
+          path: publish/output
