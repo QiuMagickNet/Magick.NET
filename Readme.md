@@ -1,6 +1,6 @@
 # The .NET library for ImageMagick: Magick.NET
 
-[![GitHub license](https://img.shields.io/badge/license-Apache%202-green.svg)](https://raw.githubusercontent.com/dlemstra/Magick.NET/main/License.txt)
+[![GitHub license](https://img.shields.io/badge/license-Apache%202-green.svg)](https://raw.githubusercontent.com/QiuMagickNet/Magick.NET/main/License.txt)
 [![Bluesky](https://img.shields.io/badge/Bluesky-0285FF?logo=bluesky&logoColor=fff)](https://bsky.app/profile/dirk.lemstra.org)
 [![Donate](https://img.shields.io/badge/%24-donate-ff00ff.svg)](https://github.com/sponsors/dlemstra)
 
@@ -70,7 +70,7 @@ Besides the quantum specific packages there are also some extra libraries in thi
 
 ## Development build
 
-Every commit to Magick.NET is automatically build and tested with the help of [GitHub Actions](https://github.com/features/actions). This build also includes the creation of a NuGet package. These packages can be downloaded here: [https://github.com/dlemstra/Magick.NET/actions](https://github.com/dlemstra/Magick.NET/actions). It is not recommended to use this build in a production environment.
+Every commit to Magick.NET is automatically build and tested with the help of [GitHub Actions](https://github.com/features/actions). This build also includes the creation of a NuGet package. These packages can be downloaded here: [https://github.com/QiuMagickNet/Magick.NET/actions](https://github.com/QiuMagickNet/Magick.NET/actions). It is not recommended to use this build in a production environment.
 
 ## Versioning
 

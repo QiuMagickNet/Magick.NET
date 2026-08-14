@@ -16,7 +16,7 @@ COPY build/shared build/shared
 
 ARG GITHUB_TOKEN
 
-RUN build/shared/install.Magick.Native.sh dlemstra ${GITHUB_TOKEN} linux-musl x64
+RUN build/shared/install.Magick.Native.sh qiumagicknet ${GITHUB_TOKEN} linux-musl x64
 
 COPY stylecop.json stylecop.json
 

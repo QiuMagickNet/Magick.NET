@@ -83,7 +83,7 @@ function updateNuspecFile($library, $version) {
     $xml = [xml](Get-Content $fileName)
 
     $xml.package.metadata.copyright = "Copyright 2013-$((Get-Date).year) Dirk Lemstra"
-    $xml.package.metadata.releaseNotes = "https://github.com/dlemstra/Magick.NET/releases/tag/$version"
+    $xml.package.metadata.releaseNotes = "https://github.com/QiuMagickNet/Magick.NET/releases/tag/$version"
 
     updateCoreVersion $xml
 

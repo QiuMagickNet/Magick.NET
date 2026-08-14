@@ -5,7 +5,7 @@ config=$1
 arch=$2
 
 if [ -z "$GITHUB_USER" ]; then
-    export GITHUB_USER='dlemstra'
+    export GITHUB_USER='qiumagicknet'
 fi
 
 if [ -z "$GITHUB_TOKEN" ]; then

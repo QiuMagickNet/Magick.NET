@@ -11,12 +11,12 @@ This document describes the requirements and instructions to build Magick.NET on
 
 ### Download the code
 
-The first step is to either clone this repository with `git` or download the latest [release](https://github.com/dlemstra/Magick.NET/releases) and
+The first step is to either clone this repository with `git` or download the latest [release](https://github.com/QiuMagickNet/Magick.NET/releases) and
 unzip the file.
 
 ### Install Magick.Native
 
-Magick.NET uses the [Magick.Native](https://github.com/dlemstra/Magick.Native) library and that needs to be installed first. To install this the
+Magick.NET uses the [Magick.Native](https://github.com/QiuMagickNet/Magick.Native) library and that needs to be installed first. To install this the
 following steps need to be done:
 
 - Log into your GitHub account and go to the **Settings**.
@@ -39,7 +39,7 @@ that there are no compiler warnings anymore because the GitHub actions build wil
 
 ### Debugging Magick.Native
 
-This project also includes some files that make it easy to debug the [Magick.Native](https://github.com/dlemstra/Magick.Native) library.
+This project also includes some files that make it easy to debug the [Magick.Native](https://github.com/QiuMagickNet/Magick.Native) library.
 For this to be possible the Magick.Native library needs to be cloned out at the same level as the Magick.NET library. If Magick.NET is cloned in
 `C:\Projects\Magick.NET` the library needs to be cloned into `C:\Projects\Magick.Native`. Before executing one of the build files inside this project
 ImageMagick needs to be cloned in the Magick.Native project. This can be done with the file `Magick.Native\src\ImageMagick\checkout.cmd`.
